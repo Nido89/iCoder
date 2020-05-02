@@ -3,7 +3,34 @@
 
 
 {% block body %}
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
 
-<h3>This is a Contact</h3>
 
+    <div class="container my-5">
+        <h3>Contact us for more Details</h3>
+        <form method="post" action="/contact" >
+            {% csrf_token %}
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
+
+  </div>
+            <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" name="email" id="email" aria-describedby="email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input type="phone" class="form-control" name="phone" id="phone">
+  </div>
+  <div class="form-group">
+    <label for="content">Describe your self here please</label>
+
+      <textarea name="content" class="form-control" id="content" cols="30" rows="10"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    </div>
 {% endblock body %}
