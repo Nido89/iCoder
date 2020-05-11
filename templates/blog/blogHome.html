@@ -1,9 +1,29 @@
 {% extends 'base.html' %}
-{% block title %} About {% endblock title %}
+{% block title %} BlogHome {% endblock title %}
+{% block blogactive %} active {% endblock blogactive%}
 
 
 {% block body %}
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
 
-<h3>This is a BlogHome</h3>
+
+<div class="container my-4">
+    <h2>Developer Life in 2020 by this blog</h2>
+    {% for post in allPosts %}
+
+
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Written by {{post.author}}</strong>
+          <h3 class="mb-0">{{post.title}}</h3>
+          <div class="mb-1 text-muted">{{post.datetime}}</div>
+          <p class="card-text mb-auto">{{post.content | truncatechars:100 }}</p>
+          <div class="my-3">
+                <a href="/blog/{{post.slug}}" role="button" class="btn btn-danger">Lets Dive Deep to Dig More</a>
+              </div>
+        </div>
+      </div>
+     {% endfor %}
+</div>
 
 {% endblock body %}

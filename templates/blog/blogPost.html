@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
-{% block title %} About {% endblock title %}
+{% block title %} Blog-Posts {% endblock title %}
 
 
 {% block body %}
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
 
-<h3>This is a BlogPost</h3>
 
+<div class="container my-4">
+        <h2 class="blog-post-title">{{post.title}}</h2>
+        <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a></p>
+
+        <p>{{post.content}}</p>
+        <hr>
+
+</div>
 {% endblock body %}

@@ -1,9 +1,30 @@
 {% extends 'base.html' %}
 {% block title %} Home {% endblock title %}
-
+{% block homeactive %} active {% endblock homeactive%}
 
 {% block body %}
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
 
-<h3>This is a Heading</h3>
+<div class="container my-4">
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to this Coding Blog</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <a class="btn btn-success btn-lg" href="/blog" role="button">Take me to Blog</a>
+</div>
+</div>
 
+<div class="container">
+    <h2>Most Read Posts of The Blog</h2>
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h2 class="d-inline-block mb-2 text-primary">World</h2>
+          <h3 class="mb-0">Featured post</h3>
+          <div class="mb-1 text-muted">Nov 12</div>
+          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" role="button" class="stretched-link btn btn-info">Continue reading</a>
+        </div>
+      </div>
+</div>
 {% endblock body %}
