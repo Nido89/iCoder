@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} BlogHome {% endblock title %}
+{% block title %} Search-Result {% endblock title %}
 {% block blogactive %} active {% endblock blogactive%}
 
 
@@ -8,7 +8,26 @@
 
 
 <div class="container my-4">
-    <h2>Developer Life in 2020 by Jalal's blog</h2>
+    <h2>Search Results below</h2>
+    {% if allPosts|length < 1 %}
+    <p>No search Results found</p>
+    Your Search query : <i><b>{{query}}</b></i> - did not match any results.
+    <br>Suggestions :<br>
+    <ul>
+        <li>
+        Try Different keywords or spellings.
+            <li>
+            Make sure all is correct.
+        <li>
+            Be More precise and specific.
+        <li>
+            Try small words and letters.
+        <li>
+            Do not use very long sentence.
+
+        </li>
+    </ul>
+    {% endif %}
     {% for post in allPosts %}
 
 

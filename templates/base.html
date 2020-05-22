@@ -15,7 +15,7 @@
 
 
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F7DC6F;">
-  <a class="navbar-brand" href="/">DevTalkies</a>
+  <a class="navbar-brand" href="/">JalalTalkies</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -35,10 +35,17 @@
         <a class="nav-link" href="/contact">Contact</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form method="get" action="/search" class="form-inline my-2 my-lg-0 mx-3">
+      <input name="query" id="query" class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-success btn-outline-primary " type="submit">Search</button>
     </form>
+            <button type="button" class="btn btn-info btn-outline-primary mx-2" data-toggle="modal" data-target="#loginModal">
+     Login
+    </button>
+     <button type="button" class="btn btn-danger btn-outline-info" data-toggle="modal" data-target="#signupModal">
+     Signup
+    </button>
+
   </div>
 </nav>
 
@@ -53,6 +60,83 @@
 </div>
   {% endfor %}
 
+<!-- Button trigger signup modal -->
+
+
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalTitle">Register on the platform</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form action="/signup" method="post">
+  <div class="form-group">
+    <label for="username">Username </label>
+    <input type="text" class="form-control" id="username" name="username" placeholder="Please Type your unique username (Lowercase only & Alphanumeric only)" required>
+  </div>
+ <div class="form-group">
+    <label for="fname">First Name</label>
+    <input type="text" class="form-control" name="fname" id="fname" placeholder="Please type your First Name here" required>
+  </div>
+          <div class="form-group">
+    <label for="lname">Last Name</label>
+    <input type="text" class="form-control" name="lname" id="lname" placeholder="Please type your Last Name here" required>
+  </div>
+ <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+  </div>
+          <div class="form-group">
+    <label for="pass1">Password</label>
+    <input type="password" class="form-control" name="pass1" id="pass1" placeholder="Please type your password here">
+  </div>
+               <div class="form-group">
+    <label for="pass2">Confirm Password</label>
+    <input type="password" class="form-control" name="pass2" id="pass2" placeholder="Please confirm your password here">
+  </div>
+    {% csrf_token %}
+           <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalTitle">Login Here</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form>
+  <div class="form-group">
+    <label for="loginusername">Username</label>
+    <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Please Type your unique username here" required>
+  </div>
+          <div class="form-group">
+    <label for="pass1">Password</label>
+    <input type="password" class="form-control" name="pass" id="pass" placeholder="Please Enter your password here" required>
+  </div>
+           <button type="button" class="btn btn-primary">Login</button>
+</form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 {% block body %}
       <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
 
