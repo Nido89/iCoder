@@ -1,18 +1,19 @@
 from django.shortcuts import render, HttpResponse, redirect
 from home.models import Contact
 from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from blog.models import Post
 
 # Create your views here.
+#MY html Pages
 def home(request):
     return render(request,'home/home.html')
 
 
 def about(request):
     messages.info(request, 'Welcome1 to AboutUs')
-    messages.info(request, 'Welcome2 to AboutUs')
-    messages.info(request, 'Welcome3 to AboutUs')
+
     return render(request,'home/about.html')
 
 def contact(request):
@@ -46,6 +47,8 @@ def search(request):
             messages.warning(request, "No matching results to your query. Please try again.")
     params = {'allPosts': allPosts, 'query':query}
     return render(request,'home/search.html',params)
+
+#Authentication APIs
 def handleSignup(request):
     if request.method == 'POST':
         #Get the post parameters
@@ -78,8 +81,32 @@ def handleSignup(request):
         myuser.first_name = fname
         myuser.last_name = lname
         myuser.save()
-        messages.success(request, "Congrats on your account registered.")
+        messages.success(request, "Congrats on your account registered at DevTalkies.")
         return redirect('home')
 
     else:
         return HttpResponse('Not Allowed')
+
+def handleLogin(request):
+    if request.method == 'POST':
+        # Get the post parameters
+        loginusername = request.POST['loginusername']
+        loginpassword = request.POST['loginpassword']
+
+        user = authenticate(username=loginusername,password=loginpassword)
+
+        if user is not None:
+            login(request,user)
+            messages.success(request,"Successfully Logged in")
+            return redirect('home')
+        else:
+            messages.error(request, "Can not login because in valid credentials")
+            return redirect('home')
+
+    return HttpResponse('404-Not Found')
+
+def handleLogout(request):
+    logout(request)
+    messages.success(request, "Successfully Logged Out")
+    return redirect('home')
+
