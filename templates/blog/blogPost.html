@@ -15,10 +15,32 @@
 </div>
 <div class="container">
     <h2>Comments</h2>
+    <form action="/blog/postComment" method="post">
+        {% csrf_token %}
+
+
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Write your comments</label>
+      <input type="text" class="form-control" name="comment" placeholder="Type your comment">
+
+  </div>
+
+        <input type="hidden" name="postSno" value="{{post.sno}}">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    {% for comment in comments %}
+
+
     <div class="row my-3">
-        <div class="col-md-2 bg-info">Image Please</div>
-            <div class="col-md-10 bg-warning"><b>Jalal: </b>Comment Please</div>
+        <div class="col-md-1">
+            <img class="rounded mx-auto d-block w-100 h-100 p-1" src="/static/img/user.png" alt="user">
+        </div>
+            <div class="col-md-11 text-info"><strong>{{comment.user.username}}: </strong> at {{comment.timestamp}}
+        <div class="text-success">{{comment.comment}}</div>
+                </div>
     </div>
+      {% endfor %}
 
 </div>
 {% endblock body %}
