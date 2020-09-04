@@ -13,7 +13,8 @@ def blogHome(request):
 def blogPost(request,slug):
     post = Post.objects.filter(slug=slug).first()
     comments = BlogComment.objects.filter(post=post)
-    context = {'post': post, 'comments': comments}
+    context = {'post': post, 'comments': comments,'user':request.user}
+
     return render(request,'blog/blogPost.html', context)
 
 def postComment(request):
@@ -22,9 +23,16 @@ def postComment(request):
         user = request.user
         postSno = request.POST.get("postSno")
         post = Post.objects.get(sno=postSno)
-        
-        comment = BlogComment(comment=comment,user=user,post=post)
-        comment.save()
-        messages.success(request,"Your comment posted successfully")
-        
+        parentSno = request.POST.get("parentSno")
+        if parentSno == "":
+            comment = BlogComment(comment=comment,user=user,post=post)
+            comment.save()
+            messages.success(request, "Your comment posted successfully")
+        else:
+            parent= BlogComment.objects.get(sno=parentSno)
+            comment = BlogComment(comment=comment, user=user, post=post,parent=parent)
+
+            comment.save()
+            messages.success(request,"Your reply posted successfully")
+
     return redirect(f"/blog/{post.slug}")  
