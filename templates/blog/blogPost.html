@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Blog-Posts {% endblock title %}
 {% load humanize %}
+{% load extras %}
 
 
 {% block body %}
@@ -80,6 +81,15 @@
 </form>
   </div>
 </div>
+
+                <div class="replies bg-danger my-2">
+                   {% for reply in replyDict|get_val:comment.sno %}
+                        {{reply}}
+                    <br>
+                    {% endfor %}
+
+
+                </div>
             </div>
                 </div>
     </div>
