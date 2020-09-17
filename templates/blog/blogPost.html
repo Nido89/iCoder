@@ -55,36 +55,56 @@
         <div class="col-md-11 border border-warning"><h6 class="text-light badge badge-pill badge-info" >{{comment.user.username}}</h6> <span class="text-dark" >{{comment.timestamp | naturaltime}}</span>
         <div class="text-success">{{comment.comment}}</div>
             <div class="reply-mx-0">
+                {% if user.is_authenticated %}
+
+                <button class="btn btn-sm btn-primary my-2" type="button" data-toggle="collapse"
+                        data-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                        aria-controls="replyBox{{comment.sno}}">
+                    Reply:
+                </button>
 
 
-  <button class="btn btn-sm btn-primary my-2" type="button" data-toggle="collapse" data-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
-   Reply:
-  </button>
+                <div class="collapse" id="replyBox{{comment.sno}}">
+                    <div class="card card-body my-2">
 
-<div class="collapse" id="replyBox{{comment.sno}}">
-  <div class="card card-body my-2">
-
-      <form action="/blog/postComment" method="post">
-        {% csrf_token %}
+                        <form action="/blog/postComment" method="post">
+                            {% csrf_token %}
 
 
+                            <div class="form-group">
+                                <label for="comment">Write your reply</label>
+                                <input type="text" class="form-control border-info" name="comment"
+                                       placeholder="Type your reply">
+                                <input type="hidden" name="parentSno" value="{{comment.sno}}">
 
-  <div class="form-group">
-    <label for="comment">Write your reply</label>
-      <input type="text" class="form-control border-info" name="comment" placeholder="Type your reply">
-      <input type="hidden" name="parentSno" value="{{comment.sno}}">
+                            </div>
 
-  </div>
+                            <input type="hidden" name="postSno" value="{{post.sno}}">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                {% else %}
+                <button class="btn btn-sm btn-primary my-2" type="button" data-toggle="collapse"
+                        data-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                        aria-controls="replyBox{{comment.sno}}" disabled>
+                    Signup or Login to Reply :
+                </button>
+                {% endif %}
 
-        <input type="hidden" name="postSno" value="{{post.sno}}">
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-  </div>
-</div>
 
-                <div class="replies bg-danger my-2">
-                   {% for reply in replyDict|get_val:comment.sno %}
-                        {{reply}}
+                <div class="replies my-2">
+                    {% for reply in replyDict|get_val:comment.sno %}
+                    <div class="row my-2">
+                        <div class="col-md-1">
+                            <img class="rounded mx-auto d-block w-100 border border-success" src="/static/img/user.png"
+                                 alt="user">
+                        </div>
+                    </div>
+
+                         <div class="col-md-11 border border-warning"><h6 class="text-light badge badge-pill badge-info" >{{reply.user.username}}</h6> <span class="text-dark" >{{reply.timestamp | naturaltime}}</span>
+        <div class="text-success">{{reply.comment}}</div>
+                        </div>
                     <br>
                     {% endfor %}
 
