@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 {% block title %} BlogHome {% endblock title %}
+
+{% block js %}
+<script>
+    let previews = document.getElementsByClassName('preview');
+    Array.from(previews).forEach((element)=>{
+    element.innerHTML = element.innerText
+
+    })
+</script>
+{% endblock js %}
+
+
 {% block blogactive %} active {% endblock blogactive%}
 
 
@@ -17,7 +29,7 @@
           <strong class="d-inline-block mb-2 text-primary">Written by {{post.author}}</strong>
             <h3 class="mb-0"><a href="/blog/{{post.slug}}">{{post.title}}</a></h3>
           <div class="mb-1 text-muted">{{post.datetime}}</div>
-          <p class="card-text mb-auto">{{post.content | truncatechars:100 }}</p>
+          <p class="card-text mb-auto"><div class="preview">{{post.content|safe | truncatechars:100 }}</div></p>
           <diva class="my-3">
                 <a href="/blog/{{post.slug}}" role="button" class="btn btn-danger">Lets Dive Deep to Dig More</a>
               </diva>

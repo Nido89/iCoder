@@ -23,7 +23,7 @@ def blogPost(request,slug):
             replyDict[reply.parent.sno].append(reply)
 
     #print(comments,replies)
-    print(replyDict)
+    #print(replyDict)
     context = {'post': post, 'comments': comments,'user':request.user,'replyDict':replyDict}
 
     return render(request,'blog/blogPost.html', context)

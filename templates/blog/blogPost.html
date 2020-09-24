@@ -12,7 +12,7 @@
         <h2 class="blog-post-title">{{post.title}}</h2>
         <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a></p>
 
-        <p>{{post.content}}</p>
+        <p>{{post.content|safe}}</p>
         <hr>
 </div>
 <div class="container">
@@ -103,7 +103,7 @@
                     </div>
 
                          <div class="col-md-11 border border-warning"><h6 class="text-light badge badge-pill badge-info" >{{reply.user.username}}</h6> <span class="text-dark" >{{reply.timestamp | naturaltime}}</span>
-        <div class="text-success">{{reply.comment}}</div>
+        <div class="text-success">{{reply.comment|safe}}</div>
                         </div>
                     <br>
                     {% endfor %}
