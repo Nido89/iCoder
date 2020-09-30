@@ -10,12 +10,14 @@
 
 <div class="container my-4">
         <h2 class="blog-post-title">{{post.title}}</h2>
-        <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a></p>
+        <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a>  <span class="badge badge-pill badge-dark">{{post.views}} views</span></p>
+
+
 
         <p>{{post.content|safe}}</p>
         <hr>
 </div>
-<div class="container">
+<div class="container ">
     <h2>Comments({{comments.count}})</h2>
     <div class="my-2">
     {% if user.is_authenticated %}
@@ -48,8 +50,8 @@
     {% for comment in comments %}
 
 
-    <div class="row my-3">
-        <div class="col-md-1">
+    <div class="row my-3 ">
+        <div class="col-md-1 ">
             <img class="rounded mx-auto d-block w-100 border border-success" src="/static/img/user.png" alt="user">
         </div>
         <div class="col-md-11 border border-warning"><h6 class="text-light badge badge-pill badge-info" >{{comment.user.username}}</h6> <span class="text-dark" >{{comment.timestamp | naturaltime}}</span>
@@ -60,7 +62,7 @@
                 <button class="btn btn-sm btn-primary my-2" type="button" data-toggle="collapse"
                         data-target="#replyBox{{comment.sno}}" aria-expanded="false"
                         aria-controls="replyBox{{comment.sno}}">
-                    Reply:
+                    Post Reply:
                 </button>
 
 
@@ -93,7 +95,7 @@
                 {% endif %}
 
 
-                <div class="replies my-2">
+                <div class="replies my-2 bg-dark">
                     {% for reply in replyDict|get_val:comment.sno %}
                     <div class="row my-2">
                         <div class="col-md-1">

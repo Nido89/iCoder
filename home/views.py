@@ -8,7 +8,9 @@ from blog.models import Post
 # Create your views here.
 #MY html Pages
 def home(request):
-    return render(request,'home/home.html')
+    #Fetching the top three posts based on number of views
+    context = {}
+    return render(request,'home/home.html',context)
 
 
 def about(request):
